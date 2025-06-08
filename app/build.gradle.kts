@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.gradle.plugin)
+    implementation(libs.androidx.startup.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -80,6 +81,8 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.okhttp)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
 
     implementation(libs.room.runtime)
@@ -94,4 +97,12 @@ dependencies {
 
     implementation(libs.timber)
     implementation(libs.gson)
+    implementation(libs.kotlinx.serialization.json)
+
+    //navigate
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
+    //constraintlayout in compose
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.animation.core.android)
 }
