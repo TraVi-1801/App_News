@@ -17,5 +17,8 @@
     <string name="error_message">發生錯誤，請再試一次。</string>
     <string name="empty_message">目前沒有新聞。</string>
     <string name="search_history">搜尋歷史</string>
+    <string name="author">作者</string>
+    <string name="published_at">發佈時間</string>
+    <string name="read_detail">閱讀更多</string>
 
 </resources>

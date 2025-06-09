@@ -17,4 +17,7 @@
     <string name="error_message">Đã xảy ra lỗi, vui lòng thử lại.</string>
     <string name="empty_message">Hiện tại chưa có tin tức nào.</string>
     <string name="search_history">Lịch sử tìm kiếm</string>
+    <string name="author">Tác giả</string>
+    <string name="published_at">Ngày đăng</string>
+    <string name="read_detail">Đọc thêm</string>
 </resources>

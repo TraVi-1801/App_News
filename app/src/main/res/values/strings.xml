@@ -16,4 +16,7 @@
     <string name="error_message">An error occurred please try again.</string>
     <string name="empty_message">There is no news at the moment.</string>
     <string name="search_history">Search history</string>
+    <string name="author">Author</string>
+    <string name="published_at">Published at</string>
+    <string name="read_detail">Read more</string>
 </resources>
