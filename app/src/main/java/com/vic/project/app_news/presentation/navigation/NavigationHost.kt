@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.vic.project.app_news.presentation.navigation.AppScreens.Details
 import com.vic.project.app_news.presentation.navigation.AppScreens.Home
+import com.vic.project.app_news.presentation.screen.home.HomeScreen
 
 @Composable
 fun AppNavHost(
@@ -20,7 +21,7 @@ fun AppNavHost(
     ) {
 
         composable<Home> {
-
+            HomeScreen()
         }
 
         composable<AppScreens.Setting> {

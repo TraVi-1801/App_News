@@ -1,10 +1,9 @@
-package com.vic_project.search_image.data.remote.models.request
+package com.vic.project.app_news.data.source.remote.model.request
 
 
 const val RESPONSE_OK = "200"
 
 enum class KeyRequest(val url: String, val codeResponse: String = RESPONSE_OK) {
 
-    RECOMMEND_KEY("https://www.pexels.com/en-us/api/v3/search/suggestions/"),
-    IMAGE_KEY("search?"),
+    GET_NEWS("everything?"),
 }

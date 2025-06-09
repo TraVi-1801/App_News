@@ -4,7 +4,7 @@ import com.vic.project.app_news.data.source.remote.model.response.BaseResponse
 import com.vic.project.app_news.data.source.remote.model.response.ResultWrapper
 import com.vic.project.app_news.di.AppModule
 import com.vic.project.app_news.utils.AppConstants
-import com.vic_project.search_image.data.remote.models.request.KeyRequest
+import com.vic.project.app_news.data.source.remote.model.request.KeyRequest
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeoutOrNull
 import okhttp3.MultipartBody

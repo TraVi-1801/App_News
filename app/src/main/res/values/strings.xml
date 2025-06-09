@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">News</string>
+    <string name="title_home">News</string>
+    <string name="language">Language</string>
+    <string name="current_language">Your current language</string>
+    <string name="english_language">English</string>
+    <string name="vi_language">Vietnamese</string>
+    <string name="tw_language">Taiwan</string>
+    <string name="title_language">Choose your preferred language</string>
+    <string name="description_language">Please select your language</string>
+    <string name="confirm">Confirm</string>
+    <string name="search_news">Search news</string>
+    <string name="not_found">No news found</string>
+    <string name="not_found_description">Please search for news with a different keyword or topic.</string>
+    <string name="try_again">Try again</string>
+    <string name="error_message">An error occurred please try again.</string>
+    <string name="empty_message">There is no news at the moment.</string>
+    <string name="search_history">Search history</string>
 </resources>

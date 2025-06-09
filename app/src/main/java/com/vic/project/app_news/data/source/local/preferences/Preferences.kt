@@ -9,12 +9,18 @@ class Preferences @Inject constructor(
 ) {
 
     var listSearch by stringPreferences(
-        key = CURRENT_USER,
+        key = LIST_SEARCH,
         defaultValue = ""
     )
 
+    var language by stringPreferences(
+        key = CURRENT_LANGUAGE,
+        defaultValue = "en"
+    )
+
     companion object {
-        private const val CURRENT_USER: String = "key_list_search"
+        private const val LIST_SEARCH: String = "key_list_search"
+        private const val CURRENT_LANGUAGE: String = "key_language"
     }
 }
 

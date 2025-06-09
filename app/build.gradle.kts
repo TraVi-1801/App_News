@@ -1,5 +1,6 @@
 import androidx.room.gradle.RoomExtension
 import com.google.devtools.ksp.gradle.KspExtension
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -12,6 +13,16 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
+// Load local.properties
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+
+// Read your key
+val apiKey = localProperties["API_KEY"] as String
+
 android {
     namespace = "com.vic.project.app_news"
     compileSdk = 35
@@ -22,6 +33,8 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -68,6 +81,14 @@ dependencies {
     implementation(libs.androidx.room.gradle.plugin)
     implementation(libs.androidx.startup.runtime)
     testImplementation(libs.junit)
+    testImplementation(libs.androidx.core)
+    // Optional -- Mockito framework
+    testImplementation(libs.mockito.core)
+    // Optional -- mockito-kotlin
+    testImplementation(libs.mockito.kotlin)
+    // Optional -- Mockk framework
+    testImplementation(libs.mockk)
+    testImplementation (libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -77,6 +98,8 @@ dependencies {
 
     // coil
     implementation(libs.coil.compose)
+    implementation(libs.coil.kt.gif)
+    implementation(libs.lottie.compose)
 
 
     implementation(libs.retrofit)

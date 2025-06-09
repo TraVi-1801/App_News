@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">News</string>
+    <string name="title_home">Tin tức</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="current_language">Ngôn ngữ hiện tại của bạn</string>
+    <string name="english_language">Tiếng Anh</string>
+    <string name="vi_language">Tiếng Việt</string>
+    <string name="tw_language">Đài Loan</string>
+    <string name="title_language">Chọn ngôn ngữ bạn muốn sử dụng</string>
+    <string name="description_language">Vui lòng chọn ngôn ngữ của bạn</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="search_news">Tìm kiếm tin tức</string>
+    <string name="not_found">Không tìm thấy tin tức nào</string>
+    <string name="not_found_description">Vui lòng tìm kiếm tin tức với từ khóa hoặc chủ đề khác.</string>
+    <string name="try_again">Thử lại</string>
+    <string name="error_message">Đã xảy ra lỗi, vui lòng thử lại.</string>
+    <string name="empty_message">Hiện tại chưa có tin tức nào.</string>
+    <string name="search_history">Lịch sử tìm kiếm</string>
+</resources>

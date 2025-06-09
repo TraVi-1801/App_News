@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">News</string>
+    <string name="title_home">新聞</string>
+    <string name="language">語言</string>
+    <string name="current_language">您目前的語言</string>
+    <string name="english_language">英文</string>
+    <string name="vi_language">越南語</string>
+    <string name="tw_language">台灣</string>
+    <string name="title_language">選擇您偏好的語言</string>
+    <string name="description_language">請選擇您的語言</string>
+    <string name="confirm">確認</string>
+    <string name="search_news">搜尋新聞</string>
+    <string name="not_found">找不到相關新聞</string>
+    <string name="not_found_description">請嘗試使用其他關鍵字或主題搜尋新聞。</string>
+    <string name="try_again">再試一次</string>
+    <string name="error_message">發生錯誤，請再試一次。</string>
+    <string name="empty_message">目前沒有新聞。</string>
+    <string name="search_history">搜尋歷史</string>
+
+</resources>
