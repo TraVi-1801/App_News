@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -99,17 +100,21 @@ class MainActivity : FragmentActivity() {
             val darkTheme = isSystemInDarkTheme()
             val orientation = resources.configuration.orientation
 
-            DisposableEffect(darkTheme) {
-                enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
-                        Color.TRANSPARENT,
-                        Color.TRANSPARENT
-                    ) { darkTheme },
-                    navigationBarStyle = SystemBarStyle.auto(
-                        LightAndroidBackgroundTheme.color.toArgb(),
-                        DarkAndroidBackgroundTheme.color.toArgb()
-                    ) { darkTheme }
-                )
+            DisposableEffect(darkTheme,orientation) {
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    enableEdgeToEdge(
+                        statusBarStyle = SystemBarStyle.auto(
+                            Color.TRANSPARENT,
+                            Color.TRANSPARENT
+                        ) { darkTheme },
+                        navigationBarStyle = SystemBarStyle.auto(
+                            LightAndroidBackgroundTheme.color.toArgb(),
+                            DarkAndroidBackgroundTheme.color.toArgb()
+                        ) { darkTheme }
+                    )
+                } else {
+                    WindowCompat.setDecorFitsSystemWindows(window, true)
+                }
                 onDispose {}
             }
 
