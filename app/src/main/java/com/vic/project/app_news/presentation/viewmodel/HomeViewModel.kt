@@ -58,6 +58,8 @@ class HomeViewModel @Inject constructor(
             .onEach { language ->
                 updateUiState(
                     uiState.value.copy(
+                        currentSearch = "",
+                        search = "",
                         listNews = emptyList(),
                         page = 1,
                         canPaginate = false,
