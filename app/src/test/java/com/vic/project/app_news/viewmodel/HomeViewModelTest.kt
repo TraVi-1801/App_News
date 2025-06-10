@@ -7,6 +7,7 @@ import com.vic.project.app_news.data.source.remote.model.response.BaseResponse
 import com.vic.project.app_news.data.source.remote.model.response.ResultWrapper
 import com.vic.project.app_news.data.source.remote.network.NetworkMonitor
 import com.vic.project.app_news.domain.repository.NewsRepository
+import com.vic.project.app_news.domain.repository.UserRepository
 import com.vic.project.app_news.presentation.viewmodel.HomeEvent
 import com.vic.project.app_news.presentation.viewmodel.HomeViewModel
 import com.vic.project.app_news.testutils.MainCoroutineRule
@@ -15,6 +16,7 @@ import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
@@ -30,6 +32,7 @@ class HomeViewModelTest {
     private lateinit var viewModel: HomeViewModel
     private val newsRepository: NewsRepository = mockk(relaxed = true)
     private val networkMonitor: NetworkMonitor = mockk(relaxed = true)
+    private val userRepository: UserRepository = mockk(relaxed = true)
 
 
     @Before
@@ -67,18 +70,19 @@ class HomeViewModelTest {
         every { fakeResponse.dataArray } returns articlesJson
 
         // Mock Repository
-        coEvery { newsRepository.getListNews(any(), any()) } returns flowOf(
+        coEvery { newsRepository.getListNews(any(), any(), any()) } returns flowOf(
             ResultWrapper.Success(
                 fakeResponse
             )
         )
         every { newsRepository.getListHistory() } returns listOf("history1", "history2")
+        every { userRepository.currentLanguage } returns MutableStateFlow("en")
 
         // Mock Network Monitor
         every { networkMonitor.isOnline } returns flowOf(true)
 
         // Init ViewModel
-        viewModel = HomeViewModel(newsRepository, networkMonitor)
+        viewModel = HomeViewModel(newsRepository, userRepository, networkMonitor)
     }
 
     @Test
