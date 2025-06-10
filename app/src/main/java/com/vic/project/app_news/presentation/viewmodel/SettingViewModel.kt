@@ -35,24 +35,26 @@ class SettingViewModel @Inject constructor(
             is SettingEvent.UpdateLanguage -> {
                 updateLanguage(event.data)
             }
+            is SettingEvent.SelectLanguage -> {
+                updateUiState(
+                    uiState.value.copy(
+                        currentLanguage = event.data
+                    )
+                )
+            }
         }
     }
 
     private fun updateLanguage(language: String) {
         async {
             userRepository.setLanguage(language)
-            // Optional: emit new state immediately if no automatic update from flow
-            updateUiState(
-                uiState.value.copy(
-                    currentLanguage = language
-                )
-            )
         }
     }
 }
 
 sealed interface SettingEvent {
     data class UpdateLanguage(val data: String) : SettingEvent
+    data class SelectLanguage(val data: String) : SettingEvent
 }
 
 data class SettingState(

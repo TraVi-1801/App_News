@@ -38,4 +38,17 @@ enum class EnumLanguage(val locale: Locale, val displayName: String) {
                 Locale("en")
             }
         }
+
+    val getAPI : String
+         get() = when(this){
+            VIETNAMESE -> {
+                "vi"
+            }
+            CHINESE_TW -> {
+                "zh"
+            }
+            else -> {
+                "en"
+            }
+        }
 }

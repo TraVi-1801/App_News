@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -69,204 +70,232 @@ fun SettingScreen(
     viewModel: SettingViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val orientation = context.resources.configuration.orientation
     val composeNavigator = currentComposeNavigator
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var key by remember (
-        orientation,
-        EnumLanguage.fromLocale(uiState.currentLanguage).language
-    ){
-        val newContext = context.updateLocale(EnumLanguage.fromLocale(uiState.currentLanguage).localDefault)
-        updateStateContext(newContext)
-        mutableStateOf(StringExtension.randomUUID())
-    }
 
-    key (
-        key
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .shadowCustom(
+                    color = MaterialTheme.colorScheme.onSurface.copy(0.3f),
+                    offsetY = 0.dp,
+                    offsetX = 3.dp,
+                    spread = 0.dp,
+                    blurRadius = 4.dp,
+                    borderRadius = 16.dp
+                )
+                .background(
+                    MaterialTheme.colorScheme.background,
+                    RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp)
+                )
+                .padding(16.dp),
         ) {
-            Column(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .shadowCustom(
-                        color = MaterialTheme.colorScheme.onSurface.copy(0.3f),
-                        offsetY = 0.dp,
-                        offsetX = 3.dp,
-                        spread = 0.dp,
-                        blurRadius = 4.dp,
-                        borderRadius = 16.dp
-                    )
-                    .background(
-                        MaterialTheme.colorScheme.background,
-                        RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp)
-                    )
-                    .padding(16.dp),
+                    .statusBarsPadding(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
+                IconButton(
+                    onClick = {
+                        composeNavigator.navigateUp()
+                    }
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_arrow_left),
+                        contentDescription = "",
+                        tint = MaterialTheme.colorScheme.onSurface,
+                    )
+                }
+                Text(
+                    text = getLocalizedString( R.string.language),
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.W600,
+                )
+
+            }
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f)
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+
+            item {
+                Spacer(Modifier.height(16.dp))
+            }
+
+            item {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .statusBarsPadding(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    IconButton(
-                        onClick = {
-                            composeNavigator.navigateUp()
-                        }
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_arrow_left),
-                            contentDescription = "",
-                            tint = MaterialTheme.colorScheme.onSurface,
+                        .background(
+                            MaterialTheme.colorScheme.primaryContainer,
+                            RoundedCornerShape(16.dp)
                         )
-                    }
-                    Text(
-                        text = getLocalizedString( R.string.language),
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.W600,
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.img_language_skill),
+                        contentDescription = "",
+                        modifier = Modifier.size(100.dp)
                     )
-
+                    Text(
+                        text = buildAnnotatedString {
+                            append(
+                                "${
+                                    getLocalizedString(
+                                        R.string.current_language
+                                    )
+                                } \n"
+                            )
+                            withStyle(
+                                style = SpanStyle(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    fontWeight = FontWeight.W600,
+                                )
+                            ) {
+                                append(EnumLanguage.fromLocale(uiState.currentLanguage).language)
+                            }
+                        },
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.W500,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.weight(1f)
+                    )
                 }
             }
 
-            LazyColumn(
+            item {
+                Column(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Text(
+                        text = getLocalizedString(
+                            R.string.title_language
+                        ),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.W600,
+                    )
+
+                    Text(
+                        text = getLocalizedString(
+                            R.string.description_language
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.W400,
+                    )
+                }
+
+            }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    ItemLanguage(
+                        modifier = Modifier
+                            .weight(1f)
+                            .aspectRatio(1f),
+                        current = uiState.currentLanguage,
+                        language = EnumLanguage.ENGLISH.language,
+                    ) {
+                        viewModel.handleEvent(
+                            SettingEvent.SelectLanguage(EnumLanguage.ENGLISH.locale.language)
+                        )
+                    }
+                    ItemLanguage(
+                        modifier = Modifier
+                            .weight(1f)
+                            .aspectRatio(1f),
+                        current = uiState.currentLanguage,
+                        language = EnumLanguage.VIETNAMESE.language,
+                    ) {
+                        viewModel.handleEvent(
+                            SettingEvent.SelectLanguage(EnumLanguage.VIETNAMESE.locale.language)
+                        )
+                    }
+                }
+            }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    ItemLanguage(
+                        modifier = Modifier
+                            .weight(1f)
+                            .aspectRatio(1f),
+                        current = uiState.currentLanguage,
+                        language = EnumLanguage.CHINESE_TW.language,
+                    ) {
+                        viewModel.handleEvent(
+                            SettingEvent.SelectLanguage(EnumLanguage.CHINESE_TW.locale.language)
+                        )
+                    }
+                    Spacer(Modifier.weight(1f))
+                }
+            }
+
+            item {
+                Spacer(Modifier.height(16.dp))
+            }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadowCustom(
+                    color = MaterialTheme.colorScheme.onSurface.copy(0.3f),
+                    offsetY = 0.dp,
+                    offsetX = 3.dp,
+                    spread = 0.dp,
+                    blurRadius = 4.dp,
+                    borderRadius = 16.dp
+                )
+                .background(MaterialTheme.colorScheme.background, RoundedCornerShape(topEnd = 16.dp, topStart = 16.dp))
+                .padding(16.dp)
+        ){
+            Row (
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-
-                item {
-                    Spacer(Modifier.height(16.dp))
-                }
-
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(
-                                MaterialTheme.colorScheme.primaryContainer,
-                                RoundedCornerShape(16.dp)
-                            )
-                            .padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.img_language_skill),
-                            contentDescription = "",
-                            modifier = Modifier.size(100.dp)
+                    .fillMaxWidth()
+                    .clickableSingle {
+                        val newContext = context.updateLocale(EnumLanguage.fromLocale(uiState.currentLanguage).localDefault)
+                        updateStateContext(newContext)
+                        viewModel.handleEvent(
+                            SettingEvent.UpdateLanguage(uiState.currentLanguage)
                         )
-                        Text(
-                            text = buildAnnotatedString {
-                                append(
-                                    "${
-                                        getLocalizedString(
-                                            R.string.current_language
-                                        )
-                                    } \n"
-                                )
-                                withStyle(
-                                    style = SpanStyle(
-                                        color = MaterialTheme.colorScheme.primary,
-                                        fontWeight = FontWeight.W600,
-                                    )
-                                ) {
-                                    append(EnumLanguage.fromLocale(uiState.currentLanguage).language)
-                                }
-                            },
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.W500,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.weight(1f)
-                        )
+                        composeNavigator.navigateUp()
                     }
-                }
-
-                item {
-                    Column(
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Text(
-                            text = getLocalizedString(
-                                R.string.title_language
-                            ),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.W600,
-                        )
-
-                        Text(
-                            text = getLocalizedString(
-                                R.string.description_language
-                            ),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.W400,
-                        )
-                    }
-
-                }
-
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        ItemLanguage(
-                            modifier = Modifier
-                                .weight(1f)
-                                .aspectRatio(1f),
-                            current = uiState.currentLanguage,
-                            language = EnumLanguage.ENGLISH.language,
-                        ) {
-                            viewModel.handleEvent(
-                                SettingEvent.UpdateLanguage(EnumLanguage.ENGLISH.locale.language)
-                            )
-                        }
-                        ItemLanguage(
-                            modifier = Modifier
-                                .weight(1f)
-                                .aspectRatio(1f),
-                            current = uiState.currentLanguage,
-                            language = EnumLanguage.VIETNAMESE.language,
-                        ) {
-                            viewModel.handleEvent(
-                                SettingEvent.UpdateLanguage(EnumLanguage.VIETNAMESE.locale.language)
-                            )
-                        }
-                    }
-                }
-
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        ItemLanguage(
-                            modifier = Modifier
-                                .weight(1f)
-                                .aspectRatio(1f),
-                            current = uiState.currentLanguage,
-                            language = EnumLanguage.CHINESE_TW.language,
-                        ) {
-                            viewModel.handleEvent(
-                                SettingEvent.UpdateLanguage(EnumLanguage.CHINESE_TW.locale.language)
-                            )
-                        }
-                        Spacer(Modifier.weight(1f))
-                    }
-                }
-
-                item {
-                    Spacer(Modifier.height(16.dp))
-                }
+                    .background(
+                        MaterialTheme.colorScheme.primary,
+                        RoundedCornerShape(16.dp)
+                    )
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ){
+                Text(
+                    text = getLocalizedString(R.string.confirm),
+                    fontWeight = FontWeight.W500,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }

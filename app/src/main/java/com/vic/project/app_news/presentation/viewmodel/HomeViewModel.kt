@@ -1,25 +1,39 @@
 package com.vic.project.app_news.presentation.viewmodel
 
 import androidx.lifecycle.viewModelScope
+import com.vic.project.app_news.data.model.EnumLanguage
 import com.vic.project.app_news.data.model.NewDetail
 import com.vic.project.app_news.data.model.state.ListState
 import com.vic.project.app_news.data.source.remote.network.NetworkMonitor
 import com.vic.project.app_news.domain.repository.NewsRepository
+import com.vic.project.app_news.domain.repository.UserRepository
+import com.vic.project.app_news.presentation.viewmodel.MainActivityUiState.Loading
+import com.vic.project.app_news.presentation.viewmodel.MainActivityUiState.Success
+import com.vic.project.app_news.utils.AuthModel
 import com.vic.project.app_news.utils.JSON
+import com.vic.project.app_news.utils.LogUtils.logger
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val newsRepository: NewsRepository,
+    private val userRepository: UserRepository,
     networkMonitor: NetworkMonitor
 ) : BaseViewModel<HomeState, HomeEvent>(HomeState()) {
-
+    val currentLanguage: StateFlow<String> = userRepository.currentLanguage.stateIn(
+        scope = viewModelScope,
+        initialValue = AuthModel.language,
+        started = SharingStarted.WhileSubscribed(5_000),
+    )
     init {
-        getImages()
 
         uiState.distinctUntilChangedBy { it.onFocus }.onEach {
                 if (it.onFocus) {
@@ -38,6 +52,22 @@ class HomeViewModel @Inject constructor(
                 getImagesTryAgain()
             }
         }.launchIn(viewModelScope)
+
+        currentLanguage
+            .distinctUntilChangedBy { it }
+            .onEach { language ->
+                logger ("testtttttt"){ language }
+                updateUiState(
+                    uiState.value.copy(
+                        listNews = emptyList(),
+                        page = 1,
+                        canPaginate = false,
+                        listState = ListState.IDLE
+                    )
+                )
+                getImages()
+            }
+            .launchIn(viewModelScope)
     }
 
     override fun handleEvent(event: HomeEvent) {
@@ -95,7 +125,7 @@ class HomeViewModel @Inject constructor(
     private fun getImagesTryAgain() {
         async {
             newsRepository.getListNews(
-                q = uiState.value.currentSearch, page = uiState.value.page
+                q = uiState.value.currentSearch, page = uiState.value.page, language = EnumLanguage.fromLocale(currentLanguage.value).getAPI
             ).collectNetworkState(showLoading = false, showError = false, doOnError = {
                 updateUiState(
                     uiState.value.copy(
@@ -125,7 +155,7 @@ class HomeViewModel @Inject constructor(
                     )
                 )
                 newsRepository.getListNews(
-                    q = uiState.value.currentSearch, page = uiState.value.page
+                    q = uiState.value.currentSearch, page = uiState.value.page, language = EnumLanguage.fromLocale(currentLanguage.value).getAPI
                 ).collectNetworkState(showLoading = false, showError = false, doOnError = {
                     onNewsLoadError()
                 }, doOnTryAgain = {
