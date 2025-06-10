@@ -129,4 +129,5 @@ dependencies {
     //constraintlayout in compose
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.animation.core.android)
+    testImplementation(kotlin("test"))
 }
