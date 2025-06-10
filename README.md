@@ -46,7 +46,7 @@ UI (Jetpack Compose)
 | DI           | Hilt                                |
 | Networking   | Retrofit, OkHttp                    |
 | Async        | Kotlin Coroutines                   |
-| Paging       | Paging 3                            |
+| Load Imag    | Coild                               |
 | Testing      | JUnit, Coroutine Test, MockK        |
 
 - Minimum SDK level 24.
