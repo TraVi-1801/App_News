@@ -15,6 +15,7 @@
     <string name="not_found">Không tìm thấy tin tức nào</string>
     <string name="not_found_description">Vui lòng tìm kiếm tin tức với từ khóa hoặc chủ đề khác.</string>
     <string name="try_again">Thử lại</string>
+    <string name="back_to_home">Quay về trang chủ</string>
     <string name="error_message">Đã xảy ra lỗi, vui lòng thử lại.</string>
     <string name="empty_message">Hiện tại chưa có tin tức nào.</string>
     <string name="search_history">Lịch sử tìm kiếm</string>

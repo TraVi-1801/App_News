@@ -48,6 +48,7 @@ fun NewsList(
     uiState: HomeState,
     modifier: Modifier,
     onRetry: () -> Unit,
+    onBackHome: () -> Unit,
     onRefresh: () -> Unit,
     onPaginate: () -> Unit
 ) {
@@ -91,7 +92,7 @@ fun NewsList(
                 when (uiState.listState) {
                     ListState.LOADING -> item { LoadingPage() }
                     ListState.ERROR -> item { ErrorPage(onRetry) }
-                    else -> if (uiState.isNotFound) item { SearchNewsNotFound() } else item { EmptyPage() }
+                    else -> if (uiState.isNotFound) item { SearchNewsNotFound{onBackHome.invoke()} } else item { EmptyPage() }
                 }
             }
 

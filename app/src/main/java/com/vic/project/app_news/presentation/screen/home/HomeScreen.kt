@@ -83,7 +83,10 @@ fun HomeScreen(
                     height = Dimension.fillToConstraints
                 },
             onRetry = {
-                // Retry logic here
+                viewModel.handleEvent(HomeEvent.OnTryAgain)
+            },
+            onBackHome = {
+                viewModel.handleEvent(HomeEvent.OnBackHome)
             },
             onRefresh = {
                 viewModel.handleEvent(HomeEvent.PullRefresh)

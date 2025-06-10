@@ -56,7 +56,6 @@ class HomeViewModel @Inject constructor(
         currentLanguage
             .distinctUntilChangedBy { it }
             .onEach { language ->
-                logger ("testtttttt"){ language }
                 updateUiState(
                     uiState.value.copy(
                         listNews = emptyList(),
@@ -118,6 +117,24 @@ class HomeViewModel @Inject constructor(
                         onFocus = event.data
                     )
                 )
+            }
+
+            HomeEvent.OnBackHome -> {
+                updateUiState(
+                    uiState.value.copy(
+                        page = 1,
+                        currentSearch = "",
+                        search = "",
+                        listNews = emptyList(),
+                        canPaginate = false,
+                        listState = ListState.IDLE
+                    )
+                )
+                getImages()
+            }
+
+            HomeEvent.OnTryAgain -> {
+                getImagesTryAgain()
             }
         }
     }
@@ -235,6 +252,8 @@ sealed interface HomeEvent {
     data class UpdateFocus(val data: Boolean) : HomeEvent
     data class SearchNews(val data: String) : HomeEvent
     data object PullRefresh : HomeEvent
+    data object OnBackHome : HomeEvent
+    data object OnTryAgain : HomeEvent
     data object GetListNews : HomeEvent
 }
 

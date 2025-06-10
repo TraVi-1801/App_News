@@ -1,11 +1,14 @@
 package com.vic.project.app_news.presentation.screen.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,9 +22,12 @@ import androidx.compose.ui.unit.dp
 import com.vic.project.app_news.R
 import com.vic.project.app_news.utils.AuthModel
 import com.vic.project.app_news.utils.ContextExtension.getLocalizedString
+import com.vic.project.app_news.utils.ModifierExtension.clickableSingle
 
 @Composable
-fun SearchNewsNotFound() {
+fun SearchNewsNotFound(
+    onBackHome: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -48,6 +54,20 @@ fun SearchNewsNotFound() {
             style = MaterialTheme.typography.bodySmall,
             fontWeight = FontWeight.W400,
             textAlign = TextAlign.Center
+        )
+        Spacer(Modifier.height(8.dp))
+        Text(
+            text = getLocalizedString(R.string.back_to_home),
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.W500,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer, RoundedCornerShape(16.dp))
+                .clickableSingle {
+                    onBackHome.invoke()
+                }
+                .padding(16.dp)
         )
     }
 }
