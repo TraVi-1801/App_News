@@ -29,11 +29,13 @@ constraintlayoutCompose = "1.1.1"
 animationCoreAndroid = "1.8.2"
 navigationCompose = "2.9.0"
 startupRuntime = "1.2.0"
+androidxCoreSplashscreen = "1.0.1"
 lottie_compose = "6.3.0"
 
 [libraries]
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
 coil_compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 coil-kt-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "coilCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

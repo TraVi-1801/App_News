@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">News</string>
     <string name="title_home">News</string>
+    <string name="title_detail">News Detail</string>
     <string name="language">Language</string>
     <string name="current_language">Your current language</string>
     <string name="english_language">English</string>

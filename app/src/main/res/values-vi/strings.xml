@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">News</string>
     <string name="title_home">Tin tức</string>
+    <string name="title_detail">Chi tiết tin tức</string>
     <string name="language">Ngôn ngữ</string>
     <string name="current_language">Ngôn ngữ hiện tại của bạn</string>
     <string name="english_language">Tiếng Anh</string>

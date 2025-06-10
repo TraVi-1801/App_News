@@ -22,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.vic.project.app_news.R
+import com.vic.project.app_news.utils.AuthModel
+import com.vic.project.app_news.utils.ContextExtension.getLocalizedString
 import com.vic.project.app_news.utils.ModifierExtension.clickableSingle
 import com.vic.project.app_news.utils.ModifierExtension.shadowCustom
 
@@ -58,7 +60,7 @@ fun SearchHistorySection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = stringResource(R.string.search_history),
+                    text = getLocalizedString(R.string.search_history),
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.W500,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,

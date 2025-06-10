@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vic.project.app_news.R
+import com.vic.project.app_news.utils.AuthModel
+import com.vic.project.app_news.utils.ContextExtension.getLocalizedString
 
 @Composable
 fun SearchNewsNotFound() {
@@ -35,14 +37,14 @@ fun SearchNewsNotFound() {
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            text = stringResource(R.string.not_found),
+            text = getLocalizedString(R.string.not_found),
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.W600,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = stringResource(R.string.not_found_description),
+            text = getLocalizedString(R.string.not_found_description),
             style = MaterialTheme.typography.bodySmall,
             fontWeight = FontWeight.W400,
             textAlign = TextAlign.Center

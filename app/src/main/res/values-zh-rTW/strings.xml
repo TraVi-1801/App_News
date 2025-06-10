@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">News</string>
     <string name="title_home">新聞</string>
+    <string name="title_detail">新聞詳情</string>
     <string name="language">語言</string>
     <string name="current_language">您目前的語言</string>
     <string name="english_language">英文</string>

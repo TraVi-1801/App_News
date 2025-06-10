@@ -27,6 +27,8 @@ import com.vic.project.app_news.R
 import com.vic.project.app_news.presentation.components.InputText
 import com.vic.project.app_news.presentation.navigation.AppScreens
 import com.vic.project.app_news.presentation.navigation.currentComposeNavigator
+import com.vic.project.app_news.utils.AuthModel
+import com.vic.project.app_news.utils.ContextExtension.getLocalizedString
 import com.vic.project.app_news.utils.ModifierExtension.shadowCustom
 
 @Composable
@@ -65,7 +67,7 @@ fun HomeHeader(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = stringResource(id = R.string.title_home),
+                text = getLocalizedString(R.string.title_home),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.W600,
             )
@@ -82,7 +84,7 @@ fun HomeHeader(
         Spacer(Modifier.height(12.dp))
         InputText(
             string = search,
-            textHint = stringResource(R.string.search_news),
+            textHint = getLocalizedString(R.string.search_news),
             imgTrailing = R.drawable.ic_search,
             imeAction = ImeAction.Search,
             onSearch = onSearch,

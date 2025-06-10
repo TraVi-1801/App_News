@@ -38,6 +38,8 @@ import com.vic.project.app_news.presentation.components.ImageLoad
 import com.vic.project.app_news.presentation.navigation.AppScreens
 import com.vic.project.app_news.presentation.navigation.currentComposeNavigator
 import com.vic.project.app_news.presentation.viewmodel.NewsDetailViewModel
+import com.vic.project.app_news.utils.AuthModel
+import com.vic.project.app_news.utils.ContextExtension.getLocalizedString
 import com.vic.project.app_news.utils.ModifierExtension.shadowCustom
 import com.vic.project.app_news.utils.StringExtension.orNullWithHolder
 
@@ -90,7 +92,7 @@ fun DetailScreen(
                 }
 
                 Text(
-                    text = stringResource(id = R.string.title_home),
+                    text = getLocalizedString(R.string.title_detail),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.W600,
                 )
@@ -130,7 +132,7 @@ fun DetailScreen(
             }
             item {
                 Text(
-                    text = "${stringResource(R.string.author)}: ${uiState.data?.author.orNullWithHolder()}",
+                    text = "${getLocalizedString(R.string.author)}: ${uiState.data?.author.orNullWithHolder()}",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.W400,
                     modifier = Modifier.padding(horizontal = 16.dp)
@@ -138,7 +140,7 @@ fun DetailScreen(
             }
             item {
                 Text(
-                    text = "${stringResource(R.string.published_at)}: ${uiState.data?.publishedAt.orNullWithHolder()}",
+                    text = "${getLocalizedString(R.string.published_at)}: ${uiState.data?.publishedAt.orNullWithHolder()}",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.W400,
                     modifier = Modifier.padding(horizontal = 16.dp)
@@ -146,7 +148,7 @@ fun DetailScreen(
             }
             item {
                 val annotatedText = buildAnnotatedString {
-                    append("${stringResource(R.string.read_detail)}: ")
+                    append("${getLocalizedString(R.string.read_detail)}: ")
                     pushStringAnnotation(
                         tag = "NAVIGATE",
                         annotation = "detail_screen"

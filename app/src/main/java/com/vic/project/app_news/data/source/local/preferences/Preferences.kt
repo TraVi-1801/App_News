@@ -1,6 +1,7 @@
 package com.vic.project.app_news.data.source.local.preferences
 
 import android.content.SharedPreferences
+import com.vic.project.app_news.data.model.EnumLanguage
 import com.vic.project.app_news.data.source.local.preferences.delegate.stringPreferences
 import javax.inject.Inject
 
@@ -15,12 +16,12 @@ class Preferences @Inject constructor(
 
     var language by stringPreferences(
         key = CURRENT_LANGUAGE,
-        defaultValue = "en"
+        defaultValue = EnumLanguage.ENGLISH.locale.language
     )
 
     companion object {
-        private const val LIST_SEARCH: String = "key_list_search"
-        private const val CURRENT_LANGUAGE: String = "key_language"
+        const val LIST_SEARCH: String = "key_list_search"
+        const val CURRENT_LANGUAGE: String = "key_language"
     }
 }
 

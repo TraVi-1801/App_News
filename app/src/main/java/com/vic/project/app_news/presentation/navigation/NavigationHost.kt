@@ -13,6 +13,7 @@ import com.vic.project.app_news.presentation.navigation.AppScreens.Home
 import com.vic.project.app_news.presentation.navigation.AppScreens.ReadMore
 import com.vic.project.app_news.presentation.screen.detail.DetailScreen
 import com.vic.project.app_news.presentation.screen.home.HomeScreen
+import com.vic.project.app_news.presentation.screen.setting.SettingScreen
 import com.vic.project.app_news.presentation.screen.web_view.WebViewScreen
 
 @Composable
@@ -31,7 +32,7 @@ fun AppNavHost(
         }
 
         composable<AppScreens.Setting> {
-
+            SettingScreen()
         }
 
         composable<Details>(

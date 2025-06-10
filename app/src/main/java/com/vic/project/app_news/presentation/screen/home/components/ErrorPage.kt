@@ -22,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.vic.project.app_news.R
+import com.vic.project.app_news.utils.AuthModel
+import com.vic.project.app_news.utils.ContextExtension.getLocalizedString
 import com.vic.project.app_news.utils.ModifierExtension.clickableSingle
 
 @Composable
@@ -44,13 +46,13 @@ fun ErrorPage(
             contentScale = ContentScale.FillWidth
         )
         Text(
-            text = stringResource(R.string.error_message),
+            text = getLocalizedString(R.string.error_message),
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.W400,
             textAlign = TextAlign.Center,
         )
         Text(
-            text = stringResource(R.string.try_again),
+            text = getLocalizedString(R.string.try_again),
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.W500,
             textAlign = TextAlign.Center,
