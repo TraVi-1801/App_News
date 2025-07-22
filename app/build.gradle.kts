@@ -24,7 +24,7 @@ android {
         applicationId = "com.vic.project.app_news"
         minSdk = 24
         targetSdk = 35
-        versionCode = 2
+        versionCode = 3
         versionName = "1.0"
 
         buildConfigField("String", "API_KEY", "\"$apiKey\"")
