@@ -14,15 +14,7 @@ plugins {
     alias(libs.plugins.firebase)
 }
 
-// Load local.properties
-val localProperties = Properties()
-val localPropertiesFile = rootProject.file("local.properties")
-if (localPropertiesFile.exists()) {
-    localProperties.load(localPropertiesFile.inputStream())
-}
-
-// Read your key
-val apiKey = localProperties["API_KEY"] as String
+val apiKey: String = System.getenv("API_KEY") ?: ""
 
 android {
     namespace = "com.vic.project.app_news"
