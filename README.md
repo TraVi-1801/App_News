@@ -4,6 +4,11 @@
 App_News is a modern Android application for browsing and reading news articles from a public API. It leverages the latest Android development practices including **Jetpack Compose**, **MVVM architecture**, **Hilt for DI**, **Retrofit**, **Coroutines**, and **Paging 3** to deliver a scalable and responsive user experience.
 </p>
 
+
+
+<img src="https://github.com/user-attachments/assets/24f66619-1326-46ca-886a-f6aee1134e46" align="right" width="200" height="400"/>
+
+
 ## 🚀 Features
 
 - 🔍 **Browse News by Category**: View top headlines filtered by categories (e.g., Technology, Health, Sports, etc.)
@@ -14,6 +19,8 @@ App_News is a modern Android application for browsing and reading news articles 
 - 🌙 **Dark Mode Support**: Fully responsive to system-wide theme changes.
 - 🔄 **Refresh News**: Pull to refresh functionality for latest updates.
 - 🧪 **Unit Testing**: Structured testing using coroutine test rules and fake repositories.
+
+
 
 ## 🧱 Architecture
 
@@ -39,7 +46,7 @@ UI (Jetpack Compose)
 | DI           | Hilt                                |
 | Networking   | Retrofit, OkHttp                    |
 | Async        | Kotlin Coroutines                   |
-| Paging       | Paging 3                            |
+| Load Imag    | Coild                               |
 | Testing      | JUnit, Coroutine Test, MockK        |
 
 - Minimum SDK level 24.
