@@ -45,4 +45,4 @@ jobs:
           firebase appdistribution:distribute app/build/outputs/apk/debug/app-debug.apk \
             --app "$FIREBASE_APP_ID" \
             --token "$FIREBASE_TOKEN" \
-            --groups testers
+            --groups internal-testers
