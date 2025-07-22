@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.room)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.firebase)
 }
 
 val apiKey: String = System.getenv("API_KEY") ?: ""
