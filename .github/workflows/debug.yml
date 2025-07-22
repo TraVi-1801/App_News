@@ -2,7 +2,8 @@ name: Android Debug CI
 
 on:
   push:
-    branches: [ build_test ]
+    branches:
+      - build_test
 
 jobs:
   debug:
