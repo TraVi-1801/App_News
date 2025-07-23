@@ -46,3 +46,4 @@ jobs:
             --app "$FIREBASE_APP_ID" \
             --token "$FIREBASE_TOKEN" \
             --groups internal-testers
+            --release-notes-file app/release-note.txt
